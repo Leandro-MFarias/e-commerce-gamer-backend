@@ -1,6 +1,7 @@
 import express from "express"
 import publicRouter from "./routes/publicRoutes.js"
 import privateRouter from "./routes/privateRoutes.js"
+import cors from 'cors';
 import cookieParser from "cookie-parser"
 
 const allowedOrigins = [
