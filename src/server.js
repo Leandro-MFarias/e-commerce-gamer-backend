@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser"
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://e-commerce-gamer-ew6l.onrender.com/"
+  "https://e-commerce-gamer-ew6l.onrender.com"
 ]
 
 const PORT = process.env.PORT || 3333
