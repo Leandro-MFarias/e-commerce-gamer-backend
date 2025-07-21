@@ -28,7 +28,7 @@ export async function loginController(req, res) {
 
     createSessionCookies(res, user)
 
-    res.status(200).send();
+    res.status(200).json({ message: "Login Efetuado" });
   } catch {
     res.status(500).json({ message: "Erro no servidor tente mais tarde" });
   }
