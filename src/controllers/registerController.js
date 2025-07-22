@@ -7,12 +7,12 @@ const prisma = new PrismaClient();
 export async function registerController(req, res) {
   try {
     const userRegisterSchema = z.object({
-      name: z.string(),
+      fullname: z.string(),
       email: z.email(),
       password: z.string(),
     });
 
-    const { name, email, password } = userRegisterSchema.parse(req.body);
+    const { fullname, email, password } = userRegisterSchema.parse(req.body);
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
 
@@ -24,7 +24,7 @@ export async function registerController(req, res) {
 
     await prisma.user.create({
       data: {
-        name,
+        fullname,
         email,
         password: hashPassword,
       },
