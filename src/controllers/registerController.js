@@ -30,7 +30,7 @@ export async function registerController(req, res) {
       },
     });
 
-    res.status(201).send();
+    res.status(201).json({ message: "Conta criada" });
   } catch (error) {
     res
       .status(500)
