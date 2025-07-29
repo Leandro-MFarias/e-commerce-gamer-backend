@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser"
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://e-commerce-gamer-omega.vercel.app/"
+  "https://e-commerce-gamer-omega.vercel.app"
 ]
 
 const PORT = process.env.PORT || 3333
