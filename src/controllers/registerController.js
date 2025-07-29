@@ -34,6 +34,6 @@ export async function registerController(req, res) {
   } catch (error) {
     res
       .status(500)
-      .json({ message: `Erro no servidor ao criar Usuário: ${error}` });
+      .json({ message: `Erro no servidor ao criar Usuário tente mais tarde` });
   }
 }
