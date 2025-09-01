@@ -26,3 +26,15 @@ export function decodedToken(token) {
   
   return decoded.id
 }
+
+export function logoutSession(req, res) {
+  res.cookies("accessToken", null, {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+    path: "/",
+    maxAge: 0
+  })
+
+  res.status(200).json({ message: "Logout realizado com sucesso" });
+}
