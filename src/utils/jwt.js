@@ -28,7 +28,7 @@ export function decodedToken(token) {
 }
 
 export function logoutSession(req, res) {
-  res.cookies("accessToken", null, {
+  res.cookie("accessToken", null, {
     httpOnly: true,
     sameSite: "None",
     secure: true,
