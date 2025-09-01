@@ -13,7 +13,7 @@ export async function profileRouter(req, res) {
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: {
-        name: true,
+        fullname: true,
         email: true,
       },
     });

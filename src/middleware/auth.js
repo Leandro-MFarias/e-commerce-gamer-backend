@@ -2,9 +2,10 @@ import { decodedToken } from "../utils/jwt.js";
 
 export async function auth(req, res, next) {
   const token = req.cookies.accessToken;
+  console.log(token);
 
   if (!token) {
-    res.status(401).json({ message: "Acesso negado" });
+    return res.status(401).json({ message: "Acesso negado" });
   }
 
   try {
