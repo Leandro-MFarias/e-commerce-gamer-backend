@@ -1,21 +1,21 @@
-import express from "express"
-import publicRouter from "./routes/publicRoutes.js"
-import privateRouter from "./routes/privateRoutes.js"
-import cors from 'cors';
-import cookieParser from "cookie-parser"
+import express from "express";
+import publicRouter from "./routes/publicRoutes.js";
+import privateRouter from "./routes/privateRoutes.js";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://e-commerce-gamer-omega.vercel.app"
-]
+  "https://e-commerce-gamer-omega.vercel.app",
+];
 
-const PORT = process.env.PORT || 3333
-const app = express() 
-app.use(express.json())
+const PORT = process.env.PORT || 3333;
+const app = express();
+app.use(express.json());
 app.use(cors({ origin: allowedOrigins, credentials: true }));
-app.use(cookieParser())
+app.use(cookieParser());
 
-app.use(publicRouter)
-app.use(privateRouter)
+app.use(publicRouter);
+app.use(privateRouter);
 
-app.listen(PORT, console.log(`Servidor rodando na porta: ${PORT}`))
+app.listen(PORT, console.log(`Servidor rodando na porta: ${PORT}`));
