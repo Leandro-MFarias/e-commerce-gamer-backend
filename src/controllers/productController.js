@@ -9,21 +9,32 @@ export async function productController(req, res) {
       req.body
     );
 
-    if ((!name, !description, !price, !stock, !imageUrl)) {
-      return res.status(400).json({ message: "Algum campo está faltando." });
-    }
-
-    await prisma.product.create({
+    const product = await prisma.product.create({
       data: {
         name,
         description,
         price,
         stock,
-        imageUrl
-      }
-    })
+        imageUrl,
+        categories: {
+          connect: categories.map((id) => ({ id })),
+        },
+      },
+      include: {
+        categories: true,
+      },
+    });
 
+    return res.status(201).json(product, { message: "Produto criado!" });
   } catch (error) {
-    return res.status(500).json({ message: "Erro no servidor ao criar produto." })
+    if (error.errors) {
+      return res
+        .status(400)
+        .json({ message: "Erro de validação", errors: error.errors });
+    }
+
+    return res
+      .status(500)
+      .json({ message: "Erro no servidor ao criar produto." });
   }
 }

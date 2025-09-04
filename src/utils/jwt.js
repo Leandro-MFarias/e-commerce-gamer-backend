@@ -1,16 +1,16 @@
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET
+const JWT_SECRET = process.env.JWT_SECRET;
 
 function generateAcessToken(user) {
-  return jwt.sign({ id: user.id}, JWT_SECRET, {
+  return jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, {
     expiresIn: "7d",
-  })
+  });
 }
 
 export function createSessionCookies(res, user) {
   // Armazeno o token gerado
-  const accessToken = generateAcessToken(user)
+  const accessToken = generateAcessToken(user);
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
@@ -22,9 +22,7 @@ export function createSessionCookies(res, user) {
 }
 
 export function decodedToken(token) {
-  const decoded = jwt.verify(token, JWT_SECRET)
-  
-  return decoded.id
+  return jwt.verify(token, JWT_SECRET);
 }
 
 export function logoutSession(req, res) {
@@ -33,8 +31,8 @@ export function logoutSession(req, res) {
     sameSite: "None",
     secure: true,
     path: "/",
-    maxAge: 0
-  })
+    maxAge: 0,
+  });
 
   res.status(200).json({ message: "Logout realizado com sucesso" });
 }
