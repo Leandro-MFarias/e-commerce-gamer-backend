@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function productController(req, res) {
   try {
-    const { name, description, price, stock, imageUrl } = productSchema.parse(
+    const { name, description, price, stock, imageUrl, categories } = productSchema.parse(
       req.body
     );
 
@@ -32,6 +32,8 @@ export async function productController(req, res) {
         .status(400)
         .json({ message: "Erro de validação", errors: error.errors });
     }
+
+    console.error(error)
 
     return res
       .status(500)
