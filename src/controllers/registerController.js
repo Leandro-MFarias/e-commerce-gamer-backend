@@ -1,17 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { z } from "zod";
+import { userRegisterSchema } from "../types/authSchema";
 
 const prisma = new PrismaClient();
 
 export async function registerController(req, res) {
   try {
-    const userRegisterSchema = z.object({
-      fullname: z.string(),
-      email: z.email(),
-      password: z.string(),
-    });
-
     const { fullname, email, password } = userRegisterSchema.parse(req.body);
 
     const existingUser = await prisma.user.findUnique({ where: { email } });

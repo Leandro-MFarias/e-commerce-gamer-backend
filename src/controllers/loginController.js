@@ -1,17 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { z } from "zod";
 import { createSessionCookies } from "../utils/jwt.js";
+import { userLoginSchema } from "../types/authSchema.js";
 
 const prisma = new PrismaClient();
 
 export async function loginController(req, res) {
   try {
-    const userLoginSchema = z.object({
-      email: z.email(),
-      password: z.string(),
-    });
-
     const { email, password } = userLoginSchema.parse(req.body);
 
     const user = await prisma.user.findUnique({ where: { email } });
