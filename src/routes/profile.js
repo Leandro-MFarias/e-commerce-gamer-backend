@@ -15,6 +15,25 @@ export async function profileRouter(req, res) {
       select: {
         fullname: true,
         email: true,
+        address: true,
+        cartItems: {
+          select: {
+            product: true,
+            quantity: true,
+          },
+        },
+        favorites: {
+          select: {
+            product: true,
+          },
+        },
+        orders: {
+          select: {
+            items: true,
+            totalAmount: true,
+            status: true,
+          },
+        },
       },
     });
 

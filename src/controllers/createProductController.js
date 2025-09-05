@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function productController(req, res) {
+export async function craeteProductController(req, res) {
   try {
     const { name, description, price, stock, imageUrl, categories } = productSchema.parse(
       req.body
