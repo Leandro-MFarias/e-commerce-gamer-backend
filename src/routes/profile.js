@@ -14,6 +14,7 @@ export async function profileRouter(req, res) {
       where: { id: userId },
       select: {
         fullname: true,
+        role: true,
         email: true,
         address: true,
         cartItems: {
