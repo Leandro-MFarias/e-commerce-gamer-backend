@@ -16,11 +16,11 @@ export async function categoriesController(req, res) {
       return res.status(400).json({ message: "Essa categoria já existe!" });
     }
 
-    const newCategory = await prisma.category.create({ data: { name } });
+    await prisma.category.create({ data: { name } });
 
     return res
       .status(201)
-      .json(newCategory, { message: "Categoria criada com sucesso!" });
+      .json({ message: "Categoria criada com sucesso!" });
   } catch (error) {
     console.log("Erro categoria: ", error);
     return res
