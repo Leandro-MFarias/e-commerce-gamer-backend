@@ -5,11 +5,10 @@ const prisma = new PrismaClient();
 
 export async function craeteProductController(req, res) {
   try {
-    const { name, description, price, stock, imageUrl, categories } = productSchema.parse(
-      req.body
-    );
+    const { name, description, price, stock, imageUrl, categories } =
+      productSchema.parse(req.body);
 
-    const product = await prisma.product.create({
+    await prisma.product.create({
       data: {
         name,
         description,
@@ -25,7 +24,7 @@ export async function craeteProductController(req, res) {
       },
     });
 
-    return res.status(201).json(product, { message: "Produto criado!" });
+    return res.status(201).json({ message: "Produto criado!" });
   } catch (error) {
     if (error.errors) {
       return res
@@ -33,7 +32,7 @@ export async function craeteProductController(req, res) {
         .json({ message: "Erro de validação", errors: error.errors });
     }
 
-    console.error(error)
+    console.error(error);
 
     return res
       .status(500)
