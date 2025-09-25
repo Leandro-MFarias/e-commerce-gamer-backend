@@ -1,9 +1,7 @@
 import express from "express";
-import publicRouter from "./routes/publicRoutes.js";
-import privateRouter from "./routes/privateRoutes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { auth } from "./middleware/auth.js";
+import routes from "./routes/index.js";
 
 const allowedOrigins = [
   "http://localhost:3000",
@@ -11,6 +9,7 @@ const allowedOrigins = [
 ];
 
 const PORT = process.env.PORT || 3333;
+
 const app = express();
 app.use(express.json());
 app.use(
@@ -23,7 +22,6 @@ app.use(
 );
 app.use(cookieParser());
 
-app.use(publicRouter);
-app.use(auth, privateRouter);
+app.use("/api", routes);
 
 app.listen(PORT, console.log(`Servidor rodando na porta: ${PORT}`));

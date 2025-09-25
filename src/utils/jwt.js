@@ -1,9 +1,14 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
+function getSecret() {
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET não definido!");
+  }
+  return process.env.JWT_SECRET;
+}
 
 function generateAcessToken(user) {
-  return jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, {
+  return jwt.sign({ id: user.id, role: user.role }, getSecret(), {
     expiresIn: "7d",
   });
 }
@@ -15,21 +20,21 @@ export function createSessionCookies(res, user) {
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
+    secure: false,
     path: "/",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 }
 
 export function decodedToken(token) {
-  return jwt.verify(token, JWT_SECRET);
+  return jwt.verify(token, getSecret());
 }
 
 export function logoutSession(req, res) {
   res.cookie("accessToken", null, {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
+    secure: false,
     path: "/",
     maxAge: 0,
   });
