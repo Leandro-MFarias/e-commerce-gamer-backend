@@ -103,13 +103,13 @@ export async function resetPassword(data) {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const data = {
+  const newData = {
     password: hashedPassword,
     resetToken: null,
     resetTokenExpire: null,
   };
 
-  await authModel.updatePassword(email, data);
+  await authModel.updatePassword(email, newData);
 
   return { message: "Senha atualizada com sucesso!!" };
 }
