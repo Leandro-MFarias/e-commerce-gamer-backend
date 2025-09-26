@@ -1,5 +1,8 @@
 import jwt from "jsonwebtoken";
 
+const isProduction = process.env.NODE_ENV === "production"
+console.log("TESTE: ",process.env.NODE_ENV);
+
 function getSecret() {
   if (!process.env.JWT_SECRET) {
     throw new Error("JWT_SECRET não definido!");
@@ -20,7 +23,7 @@ export function createSessionCookies(res, user) {
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
     sameSite: "None",
-    secure: false,
+    secure: isProduction,
     path: "/",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
@@ -34,7 +37,7 @@ export function logoutSession(req, res) {
   res.cookie("accessToken", null, {
     httpOnly: true,
     sameSite: "None",
-    secure: false,
+    secure: isProduction,
     path: "/",
     maxAge: 0,
   });
